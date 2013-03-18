@@ -5,3 +5,5 @@ bashrc	-> ~/.bashrc
 vimrc		-> ~/.vimrc
 
 awesome -> ~/.config/awesome
+
+c
