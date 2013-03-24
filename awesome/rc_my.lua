@@ -222,11 +222,11 @@ volumewidget:buttons(awful.util.table.join(
             end),
         awful.button({ }, 4,
             function()
-                awful.util.spawn("amixer -q sset Master 1dB+", false)
+                awful.util.spawn("amixer -q sset Master 3dB+", false)
             end),
         awful.button({ }, 5,
             function()
-                awful.util.spawn("amixer -q sset Master 1dB-", false)
+                awful.util.spawn("amixer -q sset Master 3dB-", false)
             end)
     )
 )
@@ -281,9 +281,9 @@ local function dispip()
     })
 end
 
-ethdowninfo:connect_signal('mouse::enter', function() dispip(path) end)
+--ethdowninfo:connect_signal('mouse::enter', function() dispip(path) end)
 ethdowninfo:connect_signal('mouse::leave', function() naughty.destroy(showip) end)
-wifidowninfo:connect_signal('mouse::enter', function() dispip(path) end)
+--wifidowninfo:connect_signal('mouse::enter', function() dispip(path) end)
 wifidowninfo:connect_signal('mouse::leave', function() naughty.destroy(showip) end)
 
 -- }}}
@@ -301,8 +301,9 @@ batwidget = wibox.widget.textbox()
 vicious.register(batwidget, vicious.widgets.bat, function(widget, args)
     local low = 33
     local high = 66
-    if (args[1] == "+") then
+    if (args[1] ~= "-") then
         powericon:set_image(baticonsdir .. "power_on.png")
+        powericon:fit(16, 16)
         if (args[2] <= low) then
             baticon:set_image(baticonsdir .. "battery_1_charging.png")
         elseif (args[2] > high) then
@@ -311,11 +312,9 @@ vicious.register(batwidget, vicious.widgets.bat, function(widget, args)
             baticon:set_image(baticonsdir .. "battery_2_charging.png")
         end
     else
-        if (args[1] == "-") then
-            powericon:set_image(baticonsdir .. "power_off.png")
-        else
-            powericon:set_image(baticonsdir .. "power_on.png")
-        end
+        powericon:set_image(baticonsdir .. "power_off.png")
+        --powericon:set_image(beautiful.confdir .. "/1x1_transparent.png")
+        powericon:fit(1, 1)
 
         if (args[2] <= low) then
             baticon:set_image(baticonsdir .. "battery_1.png")
@@ -465,20 +464,20 @@ for s = 1, screen.count() do
 --]]
     right_layout:add(netdownicon)   -- net widgets
     right_layout:add(ethdowninfo)
-    right_layout:add(space)
-    right_layout:add(wifidowninfo)
-    right_layout:add(space)
+    --right_layout:add(space)
+    --right_layout:add(wifidowninfo)
+    --right_layout:add(space)
     right_layout:add(netupicon)
     right_layout:add(ethupinfo)
-    right_layout:add(space)
-    right_layout:add(wifiupinfo)
-    right_layout:add(space)
+    --right_layout:add(space)
+    --right_layout:add(wifiupinfo)
+    --right_layout:add(space)
     right_layout:add(space)
 
     right_layout:add(lbracket)      -- keyboardlayout
     right_layout:add(layoutwidget)
     right_layout:add(rbracket)
-    right_layout:add(space)
+    --right_layout:add(space)
 
     right_layout:add(volicon)       -- volume widgets
     right_layout:add(volumewidget)
@@ -591,7 +590,7 @@ globalkeys = awful.util.table.join(
 --]]
 
     -- changed by Ivan
-    awful.key({ modkey,           }, "Tab",
+    awful.key({ altkey,           }, "Tab",
         function ()
             --awful.client.focus.history.previous()
             awful.client.focus.byidx(1)
@@ -599,7 +598,7 @@ globalkeys = awful.util.table.join(
                 client.focus:raise()
             end
         end),
-    awful.key({ modkey, "Shift"   }, "Tab",
+    awful.key({ altkey, "Shift"   }, "Tab",
         function ()
             --awful.client.focus.history.previous()
             awful.client.focus.byidx(-1)
@@ -640,6 +639,8 @@ globalkeys = awful.util.table.join(
 
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
+    awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
+    awful.key({ altkey,           }, "F4",     function (c) c:kill()                         end),
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
