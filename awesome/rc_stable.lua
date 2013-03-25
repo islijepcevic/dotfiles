@@ -65,7 +65,7 @@ terminal = "terminator"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 browser = "chromium"
-fileman = "spacefm " .. home
+fileman = "thunar " .. home
 cli_fileman = terminal .. " -title Ranger -e ranger "
 music = terminal .. " -title Music -e ncmpcpp "
 tasks = terminal .. " -e sudo htop "
@@ -590,7 +590,7 @@ globalkeys = awful.util.table.join(
 --]]
 
     -- changed by Ivan
-    awful.key({ modkey,           }, "Tab",
+    awful.key({ altkey,           }, "Tab",
         function ()
             --awful.client.focus.history.previous()
             awful.client.focus.byidx(1)
@@ -598,7 +598,7 @@ globalkeys = awful.util.table.join(
                 client.focus:raise()
             end
         end),
-    awful.key({ modkey, "Shift"   }, "Tab",
+    awful.key({ altkey, "Shift"   }, "Tab",
         function ()
             --awful.client.focus.history.previous()
             awful.client.focus.byidx(-1)
@@ -640,7 +640,7 @@ globalkeys = awful.util.table.join(
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
-    awful.key({ altkey,           }, "F4",      function (c) c:kill()                         end),
+    awful.key({ altkey,           }, "F4",     function (c) c:kill()                         end),
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
