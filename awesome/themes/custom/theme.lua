@@ -96,6 +96,7 @@ theme.widget_pac        = theme.confdir .. "/widgets/green/pacman.png"
 theme.widget_batt       = theme.confdir .. "/widgets/yellow/bat_full_01.png"
 theme.widget_clock      = theme.confdir .. "/widgets/cyan/clock.png"
 theme.widget_vol        = theme.confdir .. "/widgets/cyan/spkr_01.png"
+theme.widget_vol_mute   = theme.confdir .. "/volume/voluem_m.png"
 
 -- }}}
 

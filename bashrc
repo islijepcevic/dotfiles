@@ -57,7 +57,7 @@ fi
 # ADDED MANUALLY
 export VISUAL="/usr/bin/vim -p -X"
 
-export PATH=${PATH}:${HOME}/bin
+export PATH=${PATH}:${HOME}/bin:/opt/epsxe
 
 # sudo wpa_supplicant -c /etc/wpa_supplicant/wpa_supplicant.conf -i wlp3s0
 

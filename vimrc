@@ -157,6 +157,14 @@ set cpoptions+=$
 " enables moving into nonexisting text areas
 set virtualedit=all
 
+" folding settings
+" (don't really understand them, copied from some video tutorial)
+" za (fold/unfold current), zR (unfold all), zM (fold all)
+set foldmethod=indent       " fold based on indent
+set foldnestmax=10          " deepest fold is 10 levels
+set nofoldenable            " don't fold by default
+set foldlevel=1
+
 " PATHOGEN PLUGIN (package manager)
 call pathogen#infect()
 
