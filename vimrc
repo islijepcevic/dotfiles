@@ -172,9 +172,9 @@ call pathogen#infect()
 syntax enable
 
 if has("gui_running")
-    set background=dark
+    set background=light
 else
-    set background=dark
+    set background=light
 "    let g:solarized_termtrans=1
     let g:solarized_termcolors=256
 endif
@@ -201,3 +201,4 @@ let g:SuperTabDefaultCompletionType = "context"
 " (learn) folding
 " (learn) macros
 " (learn) regex
+" (revise) after/ftplugin
