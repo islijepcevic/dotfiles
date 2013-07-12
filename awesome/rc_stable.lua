@@ -84,7 +84,7 @@ local layouts =
     awful.layout.suit.floating,
     awful.layout.suit.tile,
     -- awful.layout.suit.tile.left,
-    -- awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
     -- awful.layout.suit.fair,
     -- awful.layout.suit.fair.horizontal,
@@ -211,10 +211,19 @@ volumewidget = wibox.widget.textbox()
 vicious.register( volumewidget, vicious.widgets.volume,
     "<span color=\"" .. beautiful.colors.base00 .. "\">$1%</span>", 1, "Master" )
 
+mute = false
+
 volumewidget:buttons(awful.util.table.join(
         awful.button({ }, 1,
             function()
                 awful.util.spawn("amixer -q sset Master toggle", false)
+                if (mute == false) then
+                    volicon:set_image(beautiful.widget_vol_mute)
+                    mute = true
+                else
+                    volicon:set_image(beautiful.widget_vol)
+                    mute = false
+                end
             end),
         awful.button({ }, 3,
             function()
