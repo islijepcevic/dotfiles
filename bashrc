@@ -37,6 +37,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
+    alias rgrep='grep -R --color=auto'
 fi
 
 # some more ls aliases
@@ -56,6 +57,14 @@ fi
 
 # ADDED MANUALLY
 export VISUAL="/usr/bin/vim -p -X"
+
+# dummy eth0 for matlab
+sudo ~/dotfiles/dummy_eth0.sh
+### very cool tutorial for sudo calls in script: http://bit.ly/13vTuo1
+
+if [ "$TERM" == "xterm" ]; then
+    export TERM=xterm-256color
+fi
 
 export PATH=${PATH}:${HOME}/bin:/opt/epsxe
 

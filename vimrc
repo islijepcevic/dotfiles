@@ -170,6 +170,10 @@ call pathogen#infect()
 
 " COLORS
 syntax enable
+" this is important for having nice colors in terminal vim
+" maybe it would be smart to add some 'if' to check if 'nogui' and if terminal
+" is right
+set t_Co=256
 
 if has("gui_running")
     set background=light
