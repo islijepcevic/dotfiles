@@ -23,6 +23,8 @@ local beautiful = require("beautiful")
 local naughty   = require("naughty")
 local menubar   = require("menubar")
 
+-- for quake terminal
+local scratch = require("scratch")
 -- }}}
 
 -- {{{ Error handling
@@ -643,7 +645,11 @@ globalkeys = awful.util.table.join(
                   awful.util.getdir("cache") .. "/history_eval")
               end),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end)
+    awful.key({ modkey }, "p", function() menubar.show() end),
+
+
+    -- scratchdrop quake terminal -- by ivan
+    awful.key({}, "F12", function() scratch.drop(terminal, "top", "center", 0.75, 0.3, sticky) end)
 )
 
 clientkeys = awful.util.table.join(
@@ -716,6 +722,7 @@ clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
     awful.button({ modkey }, 1, awful.mouse.client.move),
     awful.button({ modkey }, 3, awful.mouse.client.resize))
+
 
 -- Set keys
 root.keys(globalkeys)

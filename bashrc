@@ -16,6 +16,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+#HISTSIZE=1000
+#HISTFILESIZE=2000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -24,8 +26,51 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-alias ls='ls --color=auto' # (added by Arch)
-PS1='[\u@\h \W]\$ ' # this is how bash prompt looks like (added by Arch)
+## -- FROM UBUNTU BASHRC FOUND AT EPFL GR LABS
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$term" in
+    xterm-color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	# we have color support; assume it's compliant with ecma-48
+	# (iso/iec-6429). (lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+    else
+	color_prompt=
+    fi
+fi
+
+if [ "$color_prompt" = yes ]; then
+    PS1='[\[\033[01;30m\]\u@\h\[\033[00m\] \[\033[01;32m\]\W\[\033[00m\]]\$ '
+    #PS1='[\[\e[0;92m\]\u@\h\[\033[00m\] \[\033[01;34m\]\W\[\033[00m\]]\$ '
+              
+else
+    #ps1='\u@\h:\w\$ '
+    PS1='[\u@\h \W]\$ '
+fi
+unset color_prompt force_color_prompt
+
+# if this is an xterm set the title to user@host:dir
+case "$term" in
+xterm*|rxvt*)
+    PS1="\[\e]0;\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+## -- END -- FROM UBUNTU BASHRC FOUND AT EPFL GR LABS 
+
+# ORIGINAL FROM ARCH
+#alias ls='ls --color=auto' # (added by Arch)
+#PS1='[\u@\h \W]\$ ' # this is how bash prompt looks like (added by Arch)
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -59,7 +104,8 @@ fi
 export VISUAL="/usr/bin/vim -p -X"
 
 # dummy eth0 for matlab
-sudo ~/dotfiles/dummy_eth0.sh
+# ~/dotfiles/dummy_eth0.sh will be executed only when running matlab
+touch ~/bin/dummy_not_set
 ### very cool tutorial for sudo calls in script: http://bit.ly/13vTuo1
 
 if [ "$TERM" == "xterm" ]; then
@@ -67,6 +113,9 @@ if [ "$TERM" == "xterm" ]; then
 fi
 
 export PATH=${PATH}:${HOME}/bin:/opt/epsxe
+
+export WEBOTS_HOME=/home/ivan/Dropbox/EPFL/courses/semester_3/distributed_intelligent_systems/webots
+export PATH=${PATH}:${HOME}/bin:/opt/webots
 
 # sudo wpa_supplicant -c /etc/wpa_supplicant/wpa_supplicant.conf -i wlp3s0
 
