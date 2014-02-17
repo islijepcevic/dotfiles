@@ -19,9 +19,9 @@ thunar --daemon &
 exec dropboxd &
 exec skype &
 
-# exec gnome-session
+exec gnome-session
 # exec startkde
 # exec startxfce4
 # ...or the Window Manager of your choice
 xmodmap -e "keycode 133 = Super_L" -e "add mod4 = Super_L"
-exec awesome >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr
+#exec awesome >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr

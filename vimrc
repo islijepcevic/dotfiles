@@ -191,6 +191,8 @@ colorscheme solarized
 " remove toolbar in gui mode
 if has("gui_running")
     set guioptions-=T
+else
+    colorscheme mustang
 endif
 
 " AUTOCOMPLETE SuperTab with vim's OmniComplete

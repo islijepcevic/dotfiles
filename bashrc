@@ -114,8 +114,10 @@ fi
 
 export PATH=${PATH}:${HOME}/bin:/opt/epsxe
 
-export WEBOTS_HOME=/home/ivan/Dropbox/EPFL/courses/semester_3/distributed_intelligent_systems/webots
-export PATH=${PATH}:${HOME}/bin:/opt/webots
+export JAVA_HOME=/usr/lib/jvm/java-7-openjdk
+
+#export WEBOTS_HOME=/home/ivan/Dropbox/EPFL/courses/semester_3/distributed_intelligent_systems/webots
+#export PATH=${PATH}:${HOME}/bin:/opt/webots
 
 # sudo wpa_supplicant -c /etc/wpa_supplicant/wpa_supplicant.conf -i wlp3s0
 
