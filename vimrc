@@ -141,7 +141,21 @@ set softtabstop=4
 
 " highlighting cursor line and column
 set cursorline
-set cursorcolumn
+" toggle cursorline
+map  <silent> <Leader>cl      :set                  cursorline! <CR>
+imap <silent> <Leader>cl <Esc>:set                  cursorline! <CR>a
+" toggle cursorcolumn
+map  <silent> <Leader>cc      :set   cursorcolumn!              <CR>
+imap <silent> <Leader>cc <Esc>:set   cursorcolumn!              <CR>a
+" toggle both
+map  <silent> <Leader>ct      :set   cursorcolumn!  cursorline! <CR>
+imap <silent> <Leader>ct <Esc>:set   cursorcolumn!  cursorline! <CR>a
+" open both
+map  <silent> <Leader>co      :set   cursorcolumn   cursorline  <CR>
+imap <silent> <Leader>co <Esc>:set   cursorcolumn   cursorline  <CR>a
+" close both
+map  <silent> <Leader>cn      :set nocursorcolumn nocursorline  <CR>
+imap <silent> <Leader>cn <Esc>:set nocursorcolumn nocursorline  <CR>a
 
 " indenting based on file types
 filetype plugin indent on
@@ -186,17 +200,17 @@ endif
 let g:solarized_contrast="high"
 let g:solarized_visibility="high"
 
-colorscheme solarized
+colorscheme mustang
 
 " remove toolbar in gui mode
 if has("gui_running")
     set guioptions-=T
-else
-    colorscheme mustang
 endif
 
 " AUTOCOMPLETE SuperTab with vim's OmniComplete
 let g:SuperTabDefaultCompletionType = "context"
+
+compiler! mlint
 
 " VIM TODO: PLUGINS TO SEARCH FOR
 " auto code completion (eclim)
