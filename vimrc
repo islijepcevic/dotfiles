@@ -115,7 +115,7 @@ set ignorecase
 set hidden
 
 " FONT
-set gfn=Monospace\ 9
+set guifont=Monospace\ 10
 
 " LINE AND WORD WRAPPING
 set wrap " this is default
@@ -189,10 +189,7 @@ syntax enable
 " is right
 set t_Co=256
 
-if has("gui_running")
-    set background=light
-else
-    set background=light
+if !has("gui_running")
 "    let g:solarized_termtrans=1
     let g:solarized_termcolors=256
 endif
@@ -200,17 +197,31 @@ endif
 let g:solarized_contrast="high"
 let g:solarized_visibility="high"
 
-colorscheme mustang
-
-" remove toolbar in gui mode
 if has("gui_running")
+    colorscheme github
+
+    " remove toolbar in gui mode
     set guioptions-=T
+else
+    colorscheme mustang
 endif
+
+" custom colors for matlab, depending on colorscheme
+function MatlabColors()
+    if g:colors_name == 'solarized'
+        hi link matlabComma     Statement
+        hi link matlabSemicolon Statement
+    else
+        hi link matlabComma     SpecialKey
+        hi link matlabSemicolon SpecialKey
+    endif
+endfunction
+
+autocmd ColorScheme * call MatlabColors()
 
 " AUTOCOMPLETE SuperTab with vim's OmniComplete
 let g:SuperTabDefaultCompletionType = "context"
 
-compiler! mlint
 
 " VIM TODO: PLUGINS TO SEARCH FOR
 " auto code completion (eclim)
