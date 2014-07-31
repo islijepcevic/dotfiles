@@ -123,7 +123,7 @@ set linebreak
 set nolist " because list disables linebreak
 
 " disable wrapping (<EOL> will be inserted only when enter is pressed)
-set textwidth=0 " wraps num cols of text 
+set textwidth=0 " wraps num cols of text
 set wrapmargin=0 " sets wrap from the right end of window
 
 " color background of characters over 80 columns
@@ -222,13 +222,21 @@ autocmd ColorScheme * call MatlabColors()
 " AUTOCOMPLETE SuperTab with vim's OmniComplete
 let g:SuperTabDefaultCompletionType = "context"
 
+" this makes the statusbar in the bottom appear all the time
+" very nice since vim-airline is installed
+set laststatus=2
+
 
 " VIM TODO: PLUGINS TO SEARCH FOR
-" auto code completion (eclim)
-" check for configuring OmniComplete
-" syntax checking
+" powerline fonts:
+" -> https://github.com/Lokaltog/powerline-fonts
+" -> https://powerline.readthedocs.org/en/latest/installation/linux.html#font-installation
+" syntax checking `syntastic`
+" `vim-gitgutter` git diff on the side
+" check for configuring `OmniComplete`
 " code snippets auto insert
 " brackets
+" auto code completion (eclim)
 " (learn) folding
 " (learn) macros
 " (learn) regex
