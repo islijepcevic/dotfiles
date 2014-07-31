@@ -225,6 +225,7 @@ let g:SuperTabDefaultCompletionType = "context"
 " this makes the statusbar in the bottom appear all the time
 " very nice since vim-airline is installed
 set laststatus=2
+let g:airline_theme='zenburn'
 
 
 " VIM TODO: PLUGINS TO SEARCH FOR
