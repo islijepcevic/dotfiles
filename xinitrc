@@ -11,17 +11,23 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
   unset f
 fi
 
-thunar --daemon &
-
 # programs to run with X
 #exec chromium --disable-sync-preferences --no-startup-window &
 #exec chromium --no-startup-window &
-exec dropboxd &
-exec skype &
 
-exec gnome-session
+# comment out for gnome; uncomment for awesome
+#thunar --daemon &
+#exec dropboxd &
+#exec skype &
+
+# choose the right session - this will not change the display manager (login)
+# exec gnome-session
 # exec startkde
 # exec startxfce4
 # ...or the Window Manager of your choice
-xmodmap -e "keycode 133 = Super_L" -e "add mod4 = Super_L"
+
+# mod4 key for awesome, uncomment only for awesome
+#xmodmap -e "keycode 133 = Super_L" -e "add mod4 = Super_L"
+
+# leave commented out
 #exec awesome >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr

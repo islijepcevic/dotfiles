@@ -115,7 +115,7 @@ set ignorecase
 set hidden
 
 " FONT
-set guifont=Monospace\ 10
+set guifont=Monospace\ 9
 
 " LINE AND WORD WRAPPING
 set wrap " this is default
