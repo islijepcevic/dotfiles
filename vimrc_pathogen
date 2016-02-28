@@ -126,18 +126,15 @@ set nolist " because list disables linebreak
 set textwidth=0 " wraps num cols of text
 set wrapmargin=0 " sets wrap from the right end of window
 
-" color background of characters over 80 columns
-" highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-" match OverLength /\%81v.\+/
+set colorcolumn=81
+highlight ColorColumn ctermbg=Black
 
 " INDENTING
-
 " use spaces instead of <Tab>
 set expandtab
-
 " number of spaces for indentation
-set shiftwidth=4
-set softtabstop=4
+set shiftwidth=2
+set softtabstop=2
 
 " highlighting cursor line and column
 set cursorline
@@ -156,14 +153,6 @@ imap <silent> <Leader>co <Esc>:set   cursorcolumn   cursorline  <CR>a
 " close both
 map  <silent> <Leader>cn      :set nocursorcolumn nocursorline  <CR>
 imap <silent> <Leader>cn <Esc>:set nocursorcolumn nocursorline  <CR>a
-
-" indenting based on file types
-filetype plugin indent on
-
-" eclim needed this (but seems useful anyway)
-" enables loading plugin files for specific file types
-" (it is most probably default ON)
-filetype plugin on
 
 " this marks the change range (when 'c' is used in normal mode)
 set cpoptions+=$
@@ -207,20 +196,20 @@ else
 endif
 
 " custom colors for matlab, depending on colorscheme
-function MatlabColors()
-    if g:colors_name == 'solarized'
-        hi link matlabComma     Statement
-        hi link matlabSemicolon Statement
-    else
-        hi link matlabComma     SpecialKey
-        hi link matlabSemicolon SpecialKey
-    endif
-endfunction
-
-autocmd ColorScheme * call MatlabColors()
+"function MatlabColors()
+"    if g:colors_name == 'solarized'
+"        hi link matlabComma     Statement
+"        hi link matlabSemicolon Statement
+"    else
+"        hi link matlabComma     SpecialKey
+"        hi link matlabSemicolon SpecialKey
+"    endif
+"endfunction
+"
+"autocmd ColorScheme * call MatlabColors()
 
 " AUTOCOMPLETE SuperTab with vim's OmniComplete
-let g:SuperTabDefaultCompletionType = "context"
+"let g:SuperTabDefaultCompletionType = "context"
 
 " this makes the statusbar in the bottom appear all the time
 " very nice since vim-airline is installed

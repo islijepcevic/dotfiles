@@ -1,0 +1,261 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VUNDLE SETUP
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible              " be iMproved, required; not Vi compatible
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+"Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+"Plugin 'L9'
+" Git plugin not hosted on GitHub
+"Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Avoid a name conflict with L9
+"Plugin 'user/L9', {'name': 'newL9'}
+
+" MY PLUGINS
+
+" Colorschemes
+Plugin 'solarized'
+Plugin 'github-theme'
+Plugin 'croaker/mustang-vim'
+
+Plugin 'recover.vim'
+Plugin 'scrooloose/nerdtree.git'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" USUAL SETUP
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" When started as "evim", evim.vim will already have done these settings.
+if v:progname =~? "evim"
+  finish
+endif
+
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+if has("vms")
+  set nobackup		" do not keep a backup file, use versions instead
+else
+  set backup		" keep a backup file
+endif
+
+set history=100		" keep 50 lines of command line history
+set ruler		" show the cursor position all the time
+set showcmd		" display incomplete commands
+set incsearch		" do incremental searching
+
+" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
+" let &guioptions = substitute(&guioptions, "t", "", "g")
+
+" Don't use Ex mode, use Q for formatting
+map Q gq
+
+" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
+" so that you can undo CTRL-U after inserting a line break.
+inoremap <C-U> <C-G>u<C-U>
+
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+  set mouse=a
+endif
+
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+
+  " Enable file type detection.
+  " Use the default filetype settings, so that mail gets 'tw' set to 72,
+  " 'cindent' is on in C files, etc.
+  " Also load indent files, to automatically do language-dependent indenting.
+  " [Ivan]: this is already on, so comment-out.
+  "filetype plugin indent on
+
+  " Put these in an autocmd group, so that we can delete them easily.
+  augroup vimrcEx
+  au!
+
+  " For all text files set 'textwidth' to 78 characters.
+  autocmd FileType text setlocal textwidth=80
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid or when inside an event handler
+  " (happens when dropping a file on gvim).
+  " Also don't do it when the mark is in the first line, that is the default
+  " position when opening a file.
+  autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
+
+  augroup END
+
+else
+
+  set autoindent		" always set autoindenting on
+
+endif " has("autocmd")
+
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+" Only define it when not defined already.
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+		  \ | wincmd p | diffthis
+endif
+
+" this marks the change range (when 'c' is used in normal mode)
+set cpoptions+=$
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PERSONAL PREFERENCES
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" set line numbers
+set number
+
+" set encoding to utf-8
+set encoding=utf-8
+
+" this moves cursor when you search, finding words as you write
+set incsearch
+
+" ignore case when searching
+set ignorecase
+
+" enable changing buffers that are not curretnly displayed
+set hidden
+
+" enables moving into nonexisting text areas
+set virtualedit=all
+
+" LINE AND WORD WRAPPING
+set wrap " this is default
+set linebreak
+set nolist " because list disables linebreak
+
+" disable wrapping (<EOL> will be inserted only when enter is pressed)
+set textwidth=0 " wraps num cols of text
+set wrapmargin=0 " sets wrap from the right end of window
+
+set colorcolumn=81
+highlight ColorColumn ctermbg=Black
+
+" INDENTING
+" use spaces instead of <Tab>
+set expandtab
+" number of spaces for indentation
+set shiftwidth=2
+set softtabstop=2
+
+" CURSOR HIGHLIGHTS
+" Highlighting cursor line and column
+set cursorline
+" toggle cursorline
+map  <silent> <Leader>cl      :set                  cursorline! <CR>
+imap <silent> <Leader>cl <Esc>:set                  cursorline! <CR>a
+" toggle cursorcolumn
+map  <silent> <Leader>cc      :set   cursorcolumn!              <CR>
+imap <silent> <Leader>cc <Esc>:set   cursorcolumn!              <CR>a
+" toggle both
+map  <silent> <Leader>ct      :set   cursorcolumn!  cursorline! <CR>
+imap <silent> <Leader>ct <Esc>:set   cursorcolumn!  cursorline! <CR>a
+" open both
+map  <silent> <Leader>co      :set   cursorcolumn   cursorline  <CR>
+imap <silent> <Leader>co <Esc>:set   cursorcolumn   cursorline  <CR>a
+" close both
+map  <silent> <Leader>cn      :set nocursorcolumn nocursorline  <CR>
+imap <silent> <Leader>cn <Esc>:set nocursorcolumn nocursorline  <CR>a
+
+" FONT
+"set guifont=Monospace\ 10
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
+
+" FOLDING SETTINGS
+" (don't really understand them, copied from some video tutorial)
+" za (fold/unfold current), zR (unfold all), zM (fold all)
+"set foldmethod=indent       " fold based on indent
+"set foldnestmax=10          " deepest fold is 10 levels
+"set nofoldenable            " don't fold by default
+"set foldlevel=1
+
+" COLORS and PERSONALIZATION
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+  syntax enable
+  syntax on
+  set hlsearch
+
+  " this is important for having nice colors in terminal vim
+  " maybe it would be smart to add some 'if' to check if 'nogui' and if terminal
+  " is right
+  set t_Co=256
+  
+  let g:solarized_termcolors=256
+  let g:solarized_contrast="high"
+  let g:solarized_visibility="high"
+
+  colorscheme github
+  " Remove toolbar in gui mode
+  set guioptions-=T
+endif
+
+if !has("gui_running")
+  colorscheme mustang
+endif
+
+" Colors for Matlab-specific syntax. (comes with matlabvimcolors plugin)
+" custom colors for matlab, depending on colorscheme
+"function MatlabColors()
+"    if g:colors_name == 'solarized'
+"        hi link matlabComma     Statement
+"        hi link matlabSemicolon Statement
+"    else
+"        hi link matlabComma     SpecialKey
+"        hi link matlabSemicolon SpecialKey
+"    endif
+"endfunction
+"autocmd ColorScheme * call MatlabColors()
+
+" this makes the statusbar in the bottom appear all the time
+" very nice since vim-airline is installed
+set laststatus=2
+let g:airline_theme='sol'
+let g:airline_powerline_fonts=1
+
