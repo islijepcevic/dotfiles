@@ -32,15 +32,15 @@ Plugin 'VundleVim/Vundle.vim'
 " MY PLUGINS
 
 " Colorschemes
-Plugin 'solarized'
-Plugin 'github-theme'
-Plugin 'croaker/mustang-vim'
+" Plugin 'solarized'
+" Plugin 'github-theme'
+" Plugin 'croaker/mustang-vim'
 
-Plugin 'recover.vim'
-Plugin 'scrooloose/nerdtree.git'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'recover.vim'
+" Plugin 'scrooloose/nerdtree.git'
+" Plugin 'Valloric/YouCompleteMe'
+" Plugin 'vim-airline/vim-airline'
+" Plugin 'vim-airline/vim-airline-themes'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

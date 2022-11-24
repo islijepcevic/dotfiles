@@ -1,0 +1,309 @@
+" Welcome to Vim 
+
+" REQUIREMENTS
+" sudo apt-get install fonts-powerline
+
+" Enable modern Vim features not compatible with Vi spec.
+set nocompatible
+
+" Download vim-plug package manager.
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+
+" # Productivity
+"Plug 'ycm-core/YouCompleteMe'
+"Plug 'vim-syntastic/syntastic'
+"Plug 'vim-syntastic/syntastic'
+"Plug 'SirVer/ultisnips'
+
+" IndexSearch
+" Shows 'Match N of M' when searching.
+Plug 'vim-scripts/IndexedSearch'
+
+" # Colorscheme plugins
+Plug 'altercation/vim-colors-solarized'
+Plug 'croaker/mustang-vim'
+Plug 'endel/vim-github-colorscheme'
+Plug 'kaicataldo/material.vim'
+
+" # Visual help
+
+" Limelight
+" Focuses on the paragraph around the cursor
+" :Limelight [0.0 ~ 1.0]  " Turn on
+" Limeglight!             " Turn off
+Plug 'junegunn/limelight.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+"Plug 'google/vim-codefmt'
+
+" Check other plugins from scrooloose, timpope, SirVer
+"Plug 'chrisbra/Recover.vim'         	" Diff option for already opened files
+"Plug 'scrooloose/nerdtree'            " NERDTree
+"Plug 'Xuyuanp/nerdtree-git-plugin'    " git flags in nerdtree
+"Plug 'tmhedberg/matchit'              " Better '%' matching; NEEDS CONFIGURING
+"Plug 'honza/vim-snippets'             " loads of snippets
+"Plug 'tpope/vim-surround'             " Surround text with something. csw'
+"Plug 'tpope/vim-repeat'               " Repeat plugin maps with .
+"Plug 'leafgarland/typescript-vim'  " enables TypeScript syntax-highlighting.
+"Plug 'mhinz/vim-signify'              " sidebar gutter
+call plug#end()
+
+
+" BEGIN: IVAN'S DEFAULTS
+
+" Allow backspacing over everything in insert mode.
+set backspace=indent,eol,start
+set showcmd  " display incomplete commands
+set incsearch  " do incremental searching
+set hlsearch  " highlight all found items when searching
+set ignorecase  " ignore case when searching
+set number  " set line numbers
+set encoding=utf-8
+set hidden  " enable changing buffers that are not currently displayed
+set virtualedit=all  " enables moving into nonexisting text areas
+set autoread  " Automatically reload the changed file.
+
+" Line and word wrapping
+set wrap  " this is default
+set linebreak
+set nolist  " because list disables linebreak
+" disable wrapping (<EOL> will be inserted only when enter is pressed)
+set textwidth=0  " wraps num cols of text
+set wrapmargin=0  " sets wrap from the right end of window
+
+" Indenting
+set expandtab  " use spaces instead of <Tab>
+set shiftwidth=2
+set softtabstop=2
+" More readable line wrapping.
+set breakindent
+set breakindentopt=shift:4
+
+" Enable mouse.
+if has('mouse')
+  set mouse=a
+endif
+
+" Tmux/screen knows the extended mouse mode.
+if &term =~ '^screen' && !has('nvim')
+  set ttymouse=xterm2
+endif
+
+
+" APPEARANCE
+" Requires `sudo apt-get install fonts-powerline`
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9  " on LINUX
+" set guifont=MesloLGSDZForPowerline-Regular:h10  " on MAC
+highlight ColorColumn ctermbg=Black
+
+" When in terminal, best colorscheme is "default"
+
+if has("gui_running")
+  " remove toolbar in gui mode
+  set guioptions-=T
+
+  set guifont=MesloLGSDZForPowerline-Regular:h13
+
+  " Decent default colorschemes
+  "colorscheme desert
+  "colorscheme evening
+  "colorscheme koehler
+  "colorscheme murphy
+  "colorscheme slate
+  "colorscheme torte
+
+  " Installed colorschemes
+  "colorscheme solarized
+  "colorscheme github
+  "colorscheme mustang
+  colorscheme material
+else
+  colorscheme mustang
+endif
+
+set cursorline
+" set cursorcolumn
+
+" Configure solarized.
+let g:solarized_contrast="high"
+let g:solarized_visibility="high"
+
+" Configure airline.
+" This makes the statusbar in the bottom appear all the time.
+" Nice when vim-airline is installed.
+set laststatus=2
+let g:airline_powerline_fonts=1
+if has("gui_running")
+  let g:airline_theme='sol'
+else
+  let g:airline_theme="dark"
+  " let g:airline_theme="alduin"
+  " let g:airline_theme="badwold"
+endif
+
+" MAPPINGS
+" Set leader to space.
+let mapleader=","
+" CTRL-U in insert mode deletes a lot. Use CTRL-G U to first break undo,
+" so that you can undo CTRL-U after inserting a line break.
+inoremap <C-U> <C-G>u<C-U>
+" Remap "jj" to perform Escape.
+inoremap jj <ESC>
+
+" Clipboard
+nnoremap <C-c> "+yy
+vnoremap <C-c> "+y
+" Not shure this will work
+nnoremap <C-p> "+p
+" This might be unneccessary; shift-insert and <C-r><C-p>+ should work.
+inoremap <C-S-v> <esc>"+p
+
+" toggle cursorline
+map  <silent> <Leader>cl      :set                  cursorline! <CR>
+"imap <silent> <Leader>cl <Esc>:set                  cursorline! <CR>a
+" toggle cursorcolumn
+map  <silent> <Leader>cc      :set   cursorcolumn!              <CR>
+"imap <silent> <Leader>cc <Esc>:set   cursorcolumn!              <CR>a
+" toggle both
+map  <silent> <Leader>ct      :set   cursorcolumn!  cursorline! <CR>
+"imap <silent> <Leader>ct <Esc>:set   cursorcolumn!  cursorline! <CR>a
+" open both
+map  <silent> <Leader>co      :set   cursorcolumn   cursorline  <CR>
+"imap <silent> <Leader>co <Esc>:set   cursorcolumn   cursorline  <CR>a
+" close both
+map  <silent> <Leader>cn      :set nocursorcolumn nocursorline  <CR>
+"imap <silent> <Leader>cn <Esc>:set nocursorcolumn nocursorline  <CR>a
+
+function! SubstituteSelection(original, updated)
+  " Save cursor position.
+  let l:save = winsaveview()
+
+  " Swap original with updated.
+  let l:pattern = '\%V' . a:original . '\%V'
+  let l:substitution = '\' . a:updated
+  execute 'substitute/' . l:pattern . '/' . l:substitution . '/g'
+
+  " Move cursor to original position.
+  call winrestview(l:save)
+endfunction
+
+" Register the command.
+command! -nargs=* Swp |
+  \ :call SubstituteSelection(split(<q-args>)[0], split(<q-args>)[1])
+vmap 1 :<C-W>Swp<space>
+
+function! Surround(surrounder)
+  " Save cursor position.
+  let l:save = winsaveview()
+
+  " Define open/close characters.
+  let l:open = a:surrounder
+  if len(l:open) == 1
+    let l:mapping = {
+          \ '(': ')',
+          \ '{': '}',
+          \ '[': ']',
+          \ '<': '>',
+          \ }
+    let l:close = get(mapping, l:open, l:open)
+  elseif l:open =~ "<.*>"
+    " Does not really work...
+    echo "case 2"
+    let l:close = substitute(l:open, "<\(\v\)>", "<\/\1>", "")
+    "let l:close = call substitute(l:open, "<\(\v\)>", "\1", "")
+  else
+    let l:close = l:open
+  endif
+
+  " Surround the selection.
+  let l:pattern = '\%V.*\%V.'
+  let l:substitution = l:open . '\0' . l:close
+  execute 'substitute/' . l:pattern . '/' . l:substitution . '/g'
+
+  " Move cursor to original position.
+  call winrestview(l:save)
+endfunction
+command! -nargs=1 Srnd :call Surround(<q-args>)
+vmap 2 :<C-W>Srnd<space>
+
+" NEOVIM SPECIFIC
+if has('nvim')
+  tnoremap <Esc> <C-\><C-n>
+  tnoremap <A-h> <C-\><C-n><C-w>h
+  tnoremap <A-j> <C-\><C-n><C-w>j
+  tnoremap <A-k> <C-\><C-n><C-w>k
+  tnoremap <A-l> <C-\><C-n><C-w>l
+  nnoremap <A-h> <C-w>h
+  nnoremap <A-j> <C-w>j
+  nnoremap <A-k> <C-w>k
+  nnoremap <A-l> <C-w>l
+endif
+
+" FILETYPE-SPECIFIC STUFF
+function! JavaPresets()
+  set colorcolumn=101
+endfunction
+
+function! NonJavaPresets()
+  set colorcolumn=81
+endfunction
+
+call NonJavaPresets()
+autocmd FileType java :call JavaPresets()
+
+
+" MAGIC STUFF
+" Put below autocmds in a group so that we can delete them easily.
+augroup vimrcEx
+au!
+" When editing a file, always jump to the last known cursor position.
+" Don't do it when the position is invalid or when inside an event handler
+" (happens when dropping a file on gvim).
+" Also don't do it when the mark is in the first line, that is the default
+" position when opening a file.
+autocmd BufReadPost *
+  \ if line("'\"") > 1 && line("'\"") <= line("$") |
+  \   exe "normal! g`\"" |
+  \ endif
+augroup END
+
+" Auto resize active window
+"autocmd WinEnter * execute "vertical resize " . (&columns * 60/100)
+
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+" Only define it when not defined already.
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+  \ | wincmd p | diffthis
+endif
+" END: IVAN'S DEFAULTS
+
+
+
+" NOT IMPORTANT
+"let g:ycm_filetype_specific_completion_to_disable = {'cpp': 1, 'c': 1}
+" IMPORTANT
+"let g:ycm_autoclose_preview_window_after_completion = 1
+" IMPORTANT
+"let g:ycm_clangd_binary_path="/google/bin/releases/editor-devtools/ciderlsp"
+
+
+" KEEP THIS IN THE END
+" Enable file type based indent configuration and syntax highlighting.
+" Note that when code is pasted via the terminal, vim by default does not detect
+" that the code is pasted (as opposed to when using vim's paste mappings), which
+" leads to incorrect indentation when indent mode is on.
+" To work around this, use ":set paste" / ":set nopaste" to toggle paste mode.
+" You can also use a plugin to:
+" - enter insert mode with paste (https://github.com/tpope/vim-unimpaired)
+" - auto-detect pasting (https://github.com/ConradIrwin/vim-bracketed-paste)
+filetype plugin indent on
+syntax on
+
