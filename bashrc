@@ -79,17 +79,19 @@ xterm*|rxvt*)
 esac
 
 # enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-  alias ls='ls -G'
-  alias ls='ls --color=auto' # on linux use this.
-  alias dir='dir --color=auto'
-  alias vdir='vdir --color=auto'
+# if [ -x /usr/bin/dircolors ]; then
+# test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+alias ls='ls -G'  # on mac use this for color
+# alias ls='ls --color=auto' # on linux use this.
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
 
-  alias grep='grep --color=auto'
-  alias fgrep='fgrep --color=auto'
-  alias egrep='egrep --color=auto'
-fi
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias rgrep="grep -R"
+# fi
 
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
@@ -145,7 +147,7 @@ fi
 export EDITOR=vim
 export VISUAL="vim -p -X"
 
-export PATH=$PATH:$HOME/bin:$HOME/local/bin:$HOME/google/local/bin
+export PATH=$PATH:$HOME/bin:$HOME/local/bin:$HOME/.local/bin
 # -p for every file in its own tab
 # -X for not connecting to X server, making startup faster.
 
@@ -154,17 +156,19 @@ export PATH=$PATH:$HOME/bin:$HOME/local/bin:$HOME/google/local/bin
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/isl/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/ivan/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/isl/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/isl/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "/Users/ivan/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/ivan/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/isl/miniconda3/bin:$PATH"
+        export PATH="/Users/ivan/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
 
+
+eval "$(/opt/homebrew/bin/brew shellenv)"

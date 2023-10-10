@@ -98,8 +98,8 @@ endif
 
 " APPEARANCE
 " Requires `sudo apt-get install fonts-powerline`
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9  " on LINUX
-" set guifont=MesloLGSDZForPowerline-Regular:h10  " on MAC
+" set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9  " on LINUX
+set guifont=MesloLGSDZForPowerline-Regular:h10  " on MAC
 highlight ColorColumn ctermbg=Black
 
 " When in terminal, best colorscheme is "default"
