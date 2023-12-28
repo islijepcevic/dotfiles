@@ -3,10 +3,10 @@ conda create --name $NAME python=3.10
 conda install -y pytorch::pytorch torchvision torchaudio -c pytorch
 # anaconda
 conda install -y -c anaconda numpy scipy jupyter scikit-learn pandas \
-  more-itertools seaborn flake8
+  more-itertools matplotlib seaborn flake8 black 
 
 # conda-forge
-conda install -y -c conda-forge matplotlib lightning black
+conda install -y -c conda-forge lightning
 
 # GNNs
 pip install torch_geometric  # --no-input
