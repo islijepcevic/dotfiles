@@ -6,7 +6,7 @@ conda install -y -c anaconda numpy scipy jupyter scikit-learn pandas \
   more-itertools matplotlib seaborn flake8 black 
 
 # conda-forge
-conda install -y -c conda-forge lightning
+conda install -y -c conda-forge lightning tensorboard
 
 # GNNs
 pip install torch_geometric  # --no-input
