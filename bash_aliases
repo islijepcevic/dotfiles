@@ -2,6 +2,7 @@
 # SHORTCUTS
 ###############################################################################
 alias h=hg
+alias s=sl
 # Assumes conda is installed there.
 alias enter_conda='source ${HOME}/local/anaconda3/etc/profile.d/conda.sh'
 

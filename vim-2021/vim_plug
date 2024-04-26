@@ -294,6 +294,9 @@ endif
 " IMPORTANT
 "let g:ycm_clangd_binary_path="/google/bin/releases/editor-devtools/ciderlsp"
 
+" FZF in vim (?)
+set rtp+=/Users/isl/.local/homebrew/opt/fzf
+
 
 " KEEP THIS IN THE END
 " Enable file type based indent configuration and syntax highlighting.

@@ -144,10 +144,15 @@ if [ "$TERM" == "xterm" ]; then
     export TERM=xterm-256color
 fi
 
+
+# eval "$(/opt/homebrew/bin/brew shellenv)"
+export PATH="$HOME/.local/homebrew/bin:$HOME/.local/homebrew/sbin:$PATH"
+
 export EDITOR=vim
 export VISUAL="vim -p -X"
 
 export PATH=$PATH:$HOME/bin:$HOME/local/bin:$HOME/.local/bin
+
 # -p for every file in its own tab
 # -X for not connecting to X server, making startup faster.
 
@@ -169,6 +174,3 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-
-
-eval "$(/opt/homebrew/bin/brew shellenv)"
