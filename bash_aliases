@@ -2,14 +2,42 @@
 # SHORTCUTS
 ###############################################################################
 alias h=hg
-alias s=sl
 # Assumes conda is installed there.
-alias enter_conda='source ${HOME}/local/anaconda3/etc/profile.d/conda.sh'
+# alias enter_conda='source ${HOME}/local/anaconda3/etc/profile.d/conda.sh'
 
+alias rgrep='grep -R'
+# alias vim='nvim'
+[ -x "$(command -v nvim)" ] && alias vim='nvim'
+# nvo for nvim open
+alias nvo='nvim $(fzf --preview="cat {}")'
+
+###############################################################################
+# FACEBOOK
+###############################################################################
+
+# sudo sed -i "s/port = 8080/port = 8082/" /etc/et.cfg
+# sudo systemctl restart et
+
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+runit() {
+  echo -e "[Running...]\$ ${YELLOW}$1${NC}"
+  eval $1
+}
+
+source ${HOME}/.bash_meta_aliases
 
 ###############################################################################
 # VIM
 ###############################################################################
+
+purge_nvim() {
+  rm -rf ~/.local/share/nvim
+  rm -rf ~/.local/state/nvim
+  rm -rf ~/.cache/nvim
+}
 
 # Set the name of vim session the terminal is tied up to.
 vsset() {
@@ -82,5 +110,3 @@ function bgf() {
     else cd "${PWD/\/google3\/blaze-genfiles//google3}" > /dev/null
  fi
 }
-
-

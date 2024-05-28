@@ -1,15 +1,20 @@
+# .bashrc
+# bashrc is for aliases, functions, and shell configuration intended for use in
+# interactive shells.  However, in some circumstances, bash sources bashrc even
+# in non-interactive shells (e.g., when using scp), so it is standard practice
+# to check for interactivity at the top of .bashrc and return immediately if
+# the shell is not interactive.  The following line does that; don't remove it!
+[[ $- != *i* ]] && return
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
-#
-# Change shell by using
-# chsh -s /bin/zsh
 
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
+# If not running interactively, don't do anything - same as above.
+# case $- in
+#     *i*) ;;
+#       *) return;;
+# esac
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -19,8 +24,13 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTFILESIZE=-1
+HISTSIZE=1000000
+HISTTIMEFORMAT="%d/%m/%y %T "
+HISTCONTROL=ignoredups:ignorespace
+# Golden advice from: https://web.archive.org/web/20150908175333/http://briancarper.net/blog/248/
+export PROMPT_COMMAND="history -a; history -n"
+# Another option would be to do: https://github.com/aaronharnly/dotfiles-public/blob/master/.bash-functions.sh#L263
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -77,6 +87,10 @@ xterm*|rxvt*)
 *)
     ;;
 esac
+
+alias cp='cp --backup=numbered'
+alias ln='ln --backup=numbered'
+alias mv='mv -f --backup=numbered'
 
 # enable color support of ls and also add handy aliases
 # if [ -x /usr/bin/dircolors ]; then
